@@ -2,17 +2,11 @@ class BasketCaseController < ApplicationController
   before_action :set_fruits
   before_action :set_items
 
-  def index; end
+  NAME = "name"
+  AMOUNT = "amount"
 
-  def order_by_fruit
-    @list_items = @list_items.sort
-    @list_items = @list_items.reverse
-    render 'basket_case/index'
-  end
-
-  def order_by_amount
-    # code here
-
+  def index
+    @list_items = @list_items.sort_by { |name, amount| eval(params[:sort] || NAME) }.to_h
     render 'basket_case/index'
   end
 
